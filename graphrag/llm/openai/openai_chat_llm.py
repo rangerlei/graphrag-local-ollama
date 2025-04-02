@@ -6,6 +6,8 @@
 import logging
 from json import JSONDecodeError
 
+import ollama
+from ollama import Client
 from typing_extensions import Unpack
 
 from graphrag.llm.base import BaseLLM
@@ -52,10 +54,20 @@ class OpenAIChatLLM(BaseLLM[CompletionInput, CompletionOutput]):
             *history,
             {"role": "user", "content": input},
         ]
-        completion = await self.client.chat.completions.create(
-            messages=messages, **args
+
+        ollama_client = Client(
+            host = self.configuration.api_base
         )
-        return completion.choices[0].message.content
+
+        ollama_response = ollama_client.chat(
+            model=self.configuration.model,
+            messages=messages,
+            stream=False
+        )
+
+        return ollama_response['message']['content']
+
+        # return completion.choices[0].message.content
 
     async def _invoke_json(
         self,

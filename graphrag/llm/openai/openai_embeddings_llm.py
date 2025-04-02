@@ -1,5 +1,5 @@
 #openai_embeddings_llm.py
-
+from ollama import Client
 from typing_extensions import Unpack
 from graphrag.llm.base import BaseLLM
 from graphrag.llm.types import (
@@ -27,7 +27,14 @@ class OpenAIEmbeddingsLLM(BaseLLM[EmbeddingInput, EmbeddingOutput]):
             **(kwargs.get("model_parameters") or {}),
         }
         embedding_list = []
+        ollama_client = Client(
+            host=self._configuration.api_base
+        )
+
+
         for inp in input:
-            embedding = ollama.embeddings(model=self._configuration.model, prompt=inp)
+            # embedding = ollama.embeddings(model=self._configuration.model, prompt=inp)
+            embedding = ollama_client.embeddings(model=self._configuration.model,prompt=inp)
+
             embedding_list.append(embedding["embedding"])
         return embedding_list

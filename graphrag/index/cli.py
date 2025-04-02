@@ -25,12 +25,12 @@ from graphrag.index.progress import (
 from graphrag.index.progress.rich import RichProgressReporter
 from graphrag.index.run import run_pipeline_with_config
 
-from .emit import TableEmitterType
-from .graph.extractors.claims.prompts import CLAIM_EXTRACTION_PROMPT
-from .graph.extractors.community_reports.prompts import COMMUNITY_REPORT_PROMPT
-from .graph.extractors.graph.prompts import GRAPH_EXTRACTION_PROMPT
-from .graph.extractors.summarize.prompts import SUMMARIZE_PROMPT
-from .init_content import INIT_DOTENV, INIT_YAML
+from emit import TableEmitterType
+from graph.extractors.claims.prompts import CLAIM_EXTRACTION_PROMPT
+from graph.extractors.community_reports.prompts import COMMUNITY_REPORT_PROMPT
+from graph.extractors.graph.prompts import GRAPH_EXTRACTION_PROMPT
+from graph.extractors.summarize.prompts import SUMMARIZE_PROMPT
+from init_content import INIT_DOTENV, INIT_YAML
 
 # Ignore warnings from numba
 warnings.filterwarnings("ignore", message=".*NumbaDeprecationWarning.*")
